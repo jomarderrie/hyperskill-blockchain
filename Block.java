@@ -1,5 +1,8 @@
 package blockchain;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.Date;
 
 public class Block {
@@ -7,16 +10,24 @@ public class Block {
     private long timestamp;
     private String previousHash;
     private String hashBlock;
-    //    private Date timeToGen;
-    int magicNumber;
+    private Long timeToGen;
+    private long magicNumber;
 
-    public Block(int id, long timestamp, String previousHash, String hashBlock, int magicNumber) {
+    public Block() {
+    }
+
+    public Block(int id, long timestamp, String previousHash, String hashBlock, long magicNumber) {
         this.id = id;
         this.timestamp = timestamp;
         this.previousHash = previousHash;
         this.hashBlock = hashBlock;
-
         this.magicNumber = magicNumber;
+    }
+
+    public Block(int id, long timestamp, String previousHash) {
+        this.id = id;
+        this.timestamp = timestamp;
+        this.previousHash = previousHash;
     }
 
     public int getId() {
@@ -27,6 +38,13 @@ public class Block {
         this.id = id;
     }
 
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
 
     public String getPreviousHash() {
         return previousHash;
@@ -44,13 +62,44 @@ public class Block {
         this.hashBlock = hashBlock;
     }
 
+
+    public Long getTimeToGen() {
+        return timeToGen;
+    }
+
+    public void setTimeToGen(Long timeToGen) {
+        this.timeToGen = timeToGen;
+    }
+
+    public long getMagicNumber() {
+        return magicNumber;
+    }
+
+    public void setMagicNumber(long magicNumber) {
+        this.magicNumber = magicNumber;
+    }
+
+
     @Override
     public String toString() {
-        return "Block:" +"\n"+
-                "Id: " + id + "\n"+
-                "Timestamp: " + timestamp + "\n"+
-                "Hash of the previous block: \n" + previousHash + '\n' +
-                "Hash of the block: \n" + hashBlock  + "\n"
-                ;
+        if (timeToGen != null) {
+            return "Block:" + "\n" +
+                    "Id: " + id + "\n" +
+                    "Timestamp: " + timestamp + "\n" +
+                    "Magic number: " + magicNumber + "\n" +
+                    "Hash of the previous block: \n" + previousHash + '\n' +
+                    "Hash of the block: \n" + hashBlock + "\n"+
+                    "Block was generating for " + timeToGen + " seconds"
+                    + "\n"
+                    ;
+        } else {
+            return "Block:" + "\n" +
+                    "Id: " + id + "\n" +
+                    "Timestamp: " + timestamp + "\n" +
+                    "Magic number: " + magicNumber + "\n" +
+                    "Hash of the previous block: \n" + previousHash + '\n' +
+                    "Hash of the block: \n" + hashBlock + "\n"+ "\n"
+                    ;
+        }
     }
 }

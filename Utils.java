@@ -1,5 +1,8 @@
 package blockchain;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.security.MessageDigest;
 
 public class Utils {
@@ -7,6 +10,7 @@ public class Utils {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             /* Applies sha256 to our input */
+
             byte[] hash = digest.digest(input.getBytes("UTF-8"));
             StringBuilder hexString = new StringBuilder();
             for (byte elem: hash) {
@@ -20,4 +24,6 @@ public class Utils {
             throw new RuntimeException(e);
         }
     }
+
+
 }
